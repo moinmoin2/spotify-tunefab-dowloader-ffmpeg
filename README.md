@@ -1,7 +1,7 @@
 spotify-tunefab-dowloader-ffmpeg
 ================================
 
-##Idea and Approach
+## Idea and Approach
 
 I found a way to pass the 3 Minute limit of the TuneFab Spotify Converter by modifying ffmpeg source code
 
@@ -24,7 +24,7 @@ So the time limit of the free version is 3 minutes or 180 seconds and here they 
 My modification to the cmdutils.c
 ![Screenshot 2022-08-07 175319](https://user-images.githubusercontent.com/48869696/183299548-ceec03d0-dae1-433c-b9de-d83a19858dd8.png)
 
-##Compile
+## Compile
 
 You can recompile this repo by downloading it and type in bash in the folder "./configure --disable-shared --enable-static --disable-asm --enable-debug" to configure make. Then you simply type "make" to compile it from source. Then you get a ffmpeg and a ffmpeg_g, the last one is bigger which is used for debbuging using gdb or gdb in visual studio code.
 

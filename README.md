@@ -1,46 +1,29 @@
-FFmpeg README
-=============
+# tunefab-exploit
+I found a way to pass the 3 Minute limit of the TuneFab Spotify Converter by modifying ffmpeg source code
 
-FFmpeg is a collection of libraries and tools to process multimedia content
-such as audio, video, subtitles and related metadata.
 
-## Libraries
+I have analyzed the way how the Tunefab Spotify Converter works and how its generating the mp3 and other audio formats. 
+![Screenshot 2022-08-07 172905](https://user-images.githubusercontent.com/48869696/183298555-e3516433-04a9-4678-b897-21822081a1fa.png)
 
-* `libavcodec` provides implementation of a wider range of codecs.
-* `libavformat` implements streaming protocols, container formats and basic I/O access.
-* `libavutil` includes hashers, decompressors and miscellaneous utility functions.
-* `libavfilter` provides means to alter decoded audio and video through a directed graph of connected filters.
-* `libavdevice` provides an abstraction to access capture and playback devices.
-* `libswresample` implements audio mixing and resampling routines.
-* `libswscale` implements color conversion and scaling routines.
+First a couple of other things happen then ffmpeg gets started.
 
-## Tools
+![Screenshot 2022-08-07 173127](https://user-images.githubusercontent.com/48869696/183298661-2151aacd-3541-469c-89e2-42c5c9dce15b.png)
 
-* [ffmpeg](https://ffmpeg.org/ffmpeg.html) is a command line toolbox to
-  manipulate, convert and stream multimedia content.
-* [ffplay](https://ffmpeg.org/ffplay.html) is a minimalistic multimedia player.
-* [ffprobe](https://ffmpeg.org/ffprobe.html) is a simple analysis tool to inspect
-  multimedia content.
-* Additional small tools such as `aviocat`, `ismindex` and `qt-faststart`.
+Then the raw audio file gets downloaded and then converted using ffmpeg to mp3
 
-## Documentation
+Here you can see the full command thats been executed 
 
-The offline documentation is available in the **doc/** directory.
+C:\Windows\system32\cmd.exe /d /s /c ""C:\Program Files\TuneFab Spotify Music Converter\ffmpeg.exe" -y -f f32le -channels 2 -ss 00:00:00 -t 180 -i "C:\Users\WDAGUtilityAccount\TuneFab\Spotify Music Converter\Converted\0.pcm" -i "C:\Users\WDAGUtilityAccount\TuneFab\Spotify Music Converter\Converted\0.jpg" -s 300x300 -map 0:0 -map 1:0 -disposition:v:0 attached_pic -c:v:0 mjpeg -f "mp3" -ar "44100" -ab "256k" -id3v2_version 3 -metadata title="Beautiful Girl" -metadata artist="Luciano" -metadata album="Beautiful Girl" -metadata track="1" -metadata album_artist="Luciano" "C:\Users\WDAGUtilityAccount\TuneFab\Spotify Music Converter\Converted\Beautiful Girl.mp3""
 
-The online documentation is available in the main [website](https://ffmpeg.org)
-and in the [wiki](https://trac.ffmpeg.org).
+So the time limit of the free version is 3 minutes or 180 seconds and here they use the "-t 180" to shorten the song while converting to 3 minutes. So my idea was if I could remove the "-t 180" I could step over the 3 minute barrier. But I couldn't modify the executed parameters so I had to modify the source code of ffmpeg, where I ignore the argument. So I decided I would overrite the 3 numbers after the "-t" to 000 or 999 so ffmpeg does not shorten the song anymore. Unfortunatly I'm not really able to get the modification done. I'm not shure if I put the modification at the right spot. Maybye someone can help
 
-### Examples
+My modification to the cmdutils.c
+![Screenshot 2022-08-07 175319](https://user-images.githubusercontent.com/48869696/183299548-ceec03d0-dae1-433c-b9de-d83a19858dd8.png)
 
-Coding examples are available in the **doc/examples** directory.
 
-## License
 
-FFmpeg codebase is mainly LGPL-licensed with optional components licensed under
-GPL. Please refer to the LICENSE file for detailed information.
 
-## Contributing
+Thank you
 
-Patches should be submitted to the ffmpeg-devel mailing list using
-`git format-patch` or `git send-email`. Github pull requests should be
-avoided because they are not part of our review process and will be ignored.
+
+

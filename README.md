@@ -6,7 +6,7 @@ spotify-tunefab-dowloader-ffmpeg
 I found a way to pass the 3 Minute limit of the TuneFab Spotify Converter by modifying ffmpeg source code
 
 
-I have analyzed the way how the Tunefab Spotify Converter works and how its generating the mp3 and other audio formats. 
+I have analyzed with the Microsoft Process Monitor the way how the Tunefab Spotify Converter works and how its generating the mp3 and other audio formats. 
 ![Screenshot 2022-08-07 172905](https://user-images.githubusercontent.com/48869696/183298555-e3516433-04a9-4678-b897-21822081a1fa.png)
 
 First a couple of other things happen then ffmpeg gets started.

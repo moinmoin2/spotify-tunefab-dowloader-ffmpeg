@@ -28,7 +28,7 @@ My modification to the cmdutils.c
 
 You can recompile this repo by downloading it and type in bash in the folder 
 
-* ` /configure --disable-shared --enable-static --disable-asm --enable-debug.
+* ./configure --disable-shared --enable-static --disable-asm --enable-debug.
 
 to configure make. Then you simply type "make" to compile it from source. Then you get a ffmpeg and a ffmpeg_g, the last one is bigger which is used for debbuging using gdb or gdb in visual studio code.
 
